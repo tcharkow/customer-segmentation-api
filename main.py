@@ -16,8 +16,10 @@ app.add_middleware(
 df_country = pd.read_csv("country_distribution.csv")
 df_monthly = pd.read_csv("monthly_revenue.csv")
 df_cumulative = pd.read_csv("cumulative_revenue.csv")
+df_revenue = pd.read_csv("revenue_distribution.csv")
 rfm = pd.read_csv("rfm_segments.csv", dtype={'CustomerID': str})
 segment_summary = pd.read_csv("segment_summary.csv")
+
 
 @app.get("/")
 def root():
@@ -42,6 +44,11 @@ def get_monthly_revenue():
 @app.get("/api/cumulative-revenue")
 def get_cumulative_revenue():
     return df_cumulative.to_dict(orient="records")
+
+@app.get("/api/revenue-distribution")
+def get_revenue_distribution():
+    return df_revenue.to_dict(orient="records")
+
 @app.get("/api/cleaning-summary")
 def get_cleaning_summary():
     return [
